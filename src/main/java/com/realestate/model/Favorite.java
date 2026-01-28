@@ -3,6 +3,7 @@ package com.realestate.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -13,6 +14,7 @@ import java.time.LocalDateTime;
     @UniqueConstraint(columnNames = {"user_id", "property_id"})
 })
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Favorite {
@@ -32,7 +34,14 @@ public class Favorite {
     private Property property;
     
     @Column(nullable = false, updatable = false)
-    private LocalDateTime createdAt = LocalDateTime.now();
-    
+    private LocalDateTime createdAt;
+
     private String notes;
+
+    @PrePersist
+    protected void onCreate() {
+        if (createdAt == null) {
+            createdAt = LocalDateTime.now();
+        }
+    }
 }

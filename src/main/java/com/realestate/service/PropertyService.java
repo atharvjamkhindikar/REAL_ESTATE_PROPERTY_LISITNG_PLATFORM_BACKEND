@@ -9,6 +9,7 @@ import com.realestate.model.PropertyType;
 import com.realestate.model.User;
 import com.realestate.repository.FavoriteRepository;
 import com.realestate.repository.PropertyRepository;
+import com.realestate.repository.PropertyImageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -31,6 +32,9 @@ public class PropertyService {
     
     @Autowired
     private FavoriteRepository favoriteRepository;
+
+    @Autowired
+    private PropertyImageRepository propertyImageRepository;
 
     @Autowired
     private DotNetRecommendationClient dotNetRecommendationClient;
@@ -199,11 +203,15 @@ public class PropertyService {
                     .build();
         }
         
+        // Explicitly fetch images from database instead of relying on lazy loading
         List<String> imageUrls = null;
-        if (property.getImages() != null) {
-            imageUrls = property.getImages().stream()
+        try {
+            imageUrls = propertyImageRepository.findByPropertyIdOrderByDisplayOrderAsc(property.getId()).stream()
                     .map(img -> img.getImageUrl())
                     .collect(Collectors.toList());
+        } catch (Exception e) {
+            // If there's any error fetching images, use empty list
+            imageUrls = new java.util.ArrayList<>();
         }
         
         Long favoriteCount = favoriteRepository.countByPropertyId(property.getId());

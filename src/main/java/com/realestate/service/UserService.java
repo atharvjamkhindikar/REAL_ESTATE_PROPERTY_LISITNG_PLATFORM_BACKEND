@@ -6,6 +6,7 @@ import com.realestate.dto.UserResponse;
 import com.realestate.model.Role;
 import com.realestate.model.User;
 import com.realestate.model.UserType;
+import com.realestate.model.SubscriptionType;
 import com.realestate.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -57,8 +58,11 @@ public class UserService {
         if (userRepository.findByEmail(userRequest.getEmail()).isPresent()) {
             throw new RuntimeException("Email already exists: " + userRequest.getEmail());
         }
-        
-        User user = new User();
+
+        User user = new User();             // added for default free
+        // Ensure subscriptionType is set to a default value if not provided
+        user.setSubscriptionType(userRequest.getSubscriptionType() != null ? userRequest.getSubscriptionType() : SubscriptionType.FREE);
+
         mapRequestToUser(userRequest, user);
         return userRepository.save(user);
     }
@@ -151,7 +155,7 @@ public class UserService {
         user.setPhone(request.getPhone());
         user.setUserType(request.getUserType() != null ? request.getUserType() : UserType.BUYER);
         user.setRole(request.getRole() != null ? request.getRole() : Role.USER);
-        user.setSubscriptionType(request.getSubscriptionType());
+        user.setSubscriptionType(request.getSubscriptionType() != null ? request.getSubscriptionType() : SubscriptionType.FREE);
         user.setCompany(request.getCompany());
         user.setLicenseNumber(request.getLicenseNumber());
         user.setBio(request.getBio());

@@ -19,9 +19,11 @@ D:\CDAC Project\Atharva\Atharva\real-estate-backend\src\main\java\com\realestate
 D:\CDAC Project\Atharva\Atharva\real-estate-backend\src\main\java\com\realestate\repository\PropertyRepository.java
 D:\CDAC Project\Atharva\Atharva\real-estate-backend\src\main\java\com\realestate\dto\ContactAgentRequest.java
 D:\CDAC Project\Atharva\Atharva\real-estate-backend\src\main\java\com\realestate\controller\BuilderGroupController.java
+D:\CDAC Project\Atharva\Atharva\real-estate-backend\src\main\java\com\realestate\service\PropertyImageBulkService.java
 D:\CDAC Project\Atharva\Atharva\real-estate-backend\src\main\java\com\realestate\service\PropertyService.java
 D:\CDAC Project\Atharva\Atharva\real-estate-backend\src\main\java\com\realestate\dto\BuilderGroupResponse.java
 D:\CDAC Project\Atharva\Atharva\real-estate-backend\src\main\java\com\realestate\model\Subscription.java
+D:\CDAC Project\Atharva\Atharva\real-estate-backend\src\main\java\com\realestate\service\FileUploadService.java
 D:\CDAC Project\Atharva\Atharva\real-estate-backend\src\main\java\com\realestate\dto\PageResponse.java
 D:\CDAC Project\Atharva\Atharva\real-estate-backend\src\main\java\com\realestate\exception\ResourceNotFoundException.java
 D:\CDAC Project\Atharva\Atharva\real-estate-backend\src\main\java\com\realestate\service\DotNetRecommendationClient.java
@@ -31,6 +33,7 @@ D:\CDAC Project\Atharva\Atharva\real-estate-backend\src\main\java\com\realestate
 D:\CDAC Project\Atharva\Atharva\real-estate-backend\src\main\java\com\realestate\service\FavoriteService.java
 D:\CDAC Project\Atharva\Atharva\real-estate-backend\src\main\java\com\realestate\dto\FavoriteResponse.java
 D:\CDAC Project\Atharva\Atharva\real-estate-backend\src\main\java\com\realestate\dto\LoginResponse.java
+D:\CDAC Project\Atharva\Atharva\real-estate-backend\src\main\java\com\realestate\config\WebConfig.java
 D:\CDAC Project\Atharva\Atharva\real-estate-backend\src\main\java\com\realestate\service\SearchHistoryService.java
 D:\CDAC Project\Atharva\Atharva\real-estate-backend\src\main\java\com\realestate\model\ContactAgent.java
 D:\CDAC Project\Atharva\Atharva\real-estate-backend\src\main\java\com\realestate\repository\BuilderGroupRepository.java

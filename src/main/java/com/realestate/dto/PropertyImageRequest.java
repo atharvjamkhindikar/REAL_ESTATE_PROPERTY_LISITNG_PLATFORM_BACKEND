@@ -1,6 +1,5 @@
 package com.realestate.dto;
 
-import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,8 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class PropertyImageRequest {
 
-    @NotBlank(message = "Image URL is required")
-    private String imageUrl;
+    private String imageUrl;  // Image URL can be from file upload or external source
 
     private String caption;
 

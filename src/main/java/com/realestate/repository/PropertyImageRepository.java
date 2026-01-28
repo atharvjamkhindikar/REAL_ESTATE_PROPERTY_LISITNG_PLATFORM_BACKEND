@@ -19,4 +19,7 @@ public interface PropertyImageRepository extends JpaRepository<PropertyImage, Lo
 
     @Query("SELECT MAX(pi.displayOrder) FROM PropertyImage pi WHERE pi.property.id = :propertyId")
     Integer findMaxDisplayOrderByPropertyId(@Param("propertyId") Long propertyId);
+
+    @Query("SELECT pi FROM PropertyImage pi JOIN FETCH pi.property WHERE pi.property.id = :propertyId")
+    List<PropertyImage> findByPropertyIdWithProperty(@Param("propertyId") Long propertyId);
 }

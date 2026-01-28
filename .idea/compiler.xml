@@ -13,7 +13,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="real-estate-backend" options="-parameters" />
+      <module name="real-estate-backend" options="-parameters --enable-preview" />
     </option>
   </component>
 </project>

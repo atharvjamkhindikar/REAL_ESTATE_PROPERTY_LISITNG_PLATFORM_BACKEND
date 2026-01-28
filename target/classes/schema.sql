@@ -22,7 +22,8 @@ CREATE TABLE users (
     profile_image_url VARCHAR(255),
     active BOOLEAN NOT NULL DEFAULT TRUE,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    subscription_type VARCHAR(50) NOT NULL DEFAULT 'FREE'
 );
 
 -- ========================================
@@ -116,6 +117,28 @@ CREATE TABLE schedule_viewings (
     -- Foreign Key Constraints
     CONSTRAINT fk_viewing_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
     CONSTRAINT fk_viewing_property FOREIGN KEY (property_id) REFERENCES properties(id) ON DELETE CASCADE
+);
+
+-- ========================================
+-- SUBSCRIPTIONS TABLE
+-- ========================================
+-- Stores subscription details for users
+CREATE TABLE subscriptions (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    user_id BIGINT NOT NULL UNIQUE, -- Foreign Key to users table
+    plan_type VARCHAR(50) NOT NULL DEFAULT 'FREE',
+    start_date DATE NOT NULL,
+    end_date DATE,
+    price DECIMAL(19,2),
+    active BOOLEAN NOT NULL DEFAULT TRUE,
+    auto_renew BOOLEAN NOT NULL DEFAULT FALSE,
+    payment_method VARCHAR(255),
+    transaction_id VARCHAR(255),
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    -- Foreign Key Constraint
+    CONSTRAINT fk_subscription_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
 -- ========================================

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -14,6 +15,7 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "subscriptions")
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Subscription {
@@ -26,7 +28,7 @@ public class Subscription {
     @JoinColumn(name = "user_id", nullable = false, unique = true)
     @JsonIgnoreProperties({"favorites", "properties", "searchHistories", "subscription", "hibernateLazyInitializer", "handler"})
     private User user;
-    
+
     @NotNull(message = "Plan type is required")
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)

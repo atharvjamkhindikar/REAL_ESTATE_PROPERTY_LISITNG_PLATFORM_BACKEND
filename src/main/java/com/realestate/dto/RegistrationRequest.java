@@ -1,6 +1,7 @@
 package com.realestate.dto;
 
 import com.realestate.model.UserType;
+import com.realestate.model.SubscriptionType;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -42,4 +43,7 @@ public class RegistrationRequest {
 
     private String company;
     private String bio;
+
+    @NotNull(message = "Subscription type is required")
+    private SubscriptionType subscriptionType = SubscriptionType.FREE;
 }

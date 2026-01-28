@@ -38,6 +38,7 @@ public class AuthController {
                 }
             }
 
+
             // Convert to UserRequest and create user
             UserRequest userRequest = UserRequest.builder()
                     .firstName(request.getFirstName())
@@ -49,6 +50,7 @@ public class AuthController {
                     .licenseNumber(request.getLicenseNumber())
                     .company(request.getCompany())
                     .bio(request.getBio())
+                    .subscriptionType(request.getSubscriptionType()) // Set subscriptionType
                     .build();
 
             User user = userService.createUser(userRequest);
@@ -174,4 +176,3 @@ public class AuthController {
         return ResponseEntity.ok(ApiResponse.success("Agent login successful", agentResponse));
     }
 }
-

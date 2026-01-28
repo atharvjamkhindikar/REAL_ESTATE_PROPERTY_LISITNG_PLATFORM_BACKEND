@@ -13,6 +13,7 @@ import com.realestate.service.DotNetRecommendationClient;
 import com.realestate.repository.PropertyRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +24,6 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/properties")
-@CrossOrigin(origins = "http://localhost:3000")
 public class PropertyController {
     
     @Autowired
@@ -101,8 +101,26 @@ public class PropertyController {
     
     @DeleteMapping("/{id}")
     public ResponseEntity<ApiResponse<Void>> deleteProperty(@PathVariable Long id) {
-        propertyService.deleteProperty(id);
-        return ResponseEntity.ok(ApiResponse.success("Property deleted successfully", null));
+        try {
+            // Check if property exists first
+            if (!propertyRepository.existsById(id)) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                        .body(ApiResponse.error("Property not found with id: " + id));
+            }
+
+            // Delete the property (cascade will handle related records)
+            propertyService.deleteProperty(id);
+
+            return ResponseEntity.ok(ApiResponse.success("Property deleted successfully", null));
+        } catch (DataIntegrityViolationException e) {
+            // Handle foreign key constraint violations
+            return ResponseEntity.status(HttpStatus.CONFLICT)
+                    .body(ApiResponse.error("Cannot delete property: It has related records. Please delete related items first."));
+        } catch (Exception e) {
+            // Handle any other exceptions
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(ApiResponse.error("Error deleting property: " + e.getMessage()));
+        }
     }
     
     // Advanced Search
@@ -236,5 +254,12 @@ public class PropertyController {
         List<Property> allProperties = propertyRepository.findAll();
         List<Property> recommendations = dotNetRecommendationClient.getRecommendations(allProperties, location, budget);
         return ResponseEntity.ok(ApiResponse.success(recommendations));
+    }
+
+    @GetMapping("/convert-price")
+    public ResponseEntity<ApiResponse<BigDecimal>> convertPriceToINR(@RequestParam BigDecimal priceInUSD) {
+        BigDecimal conversionRate = new BigDecimal("82.50"); // Example conversion rate
+        BigDecimal priceInINR = priceInUSD.multiply(conversionRate);
+        return ResponseEntity.ok(ApiResponse.success(priceInINR));
     }
 }

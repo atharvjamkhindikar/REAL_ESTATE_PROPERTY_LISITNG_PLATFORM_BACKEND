@@ -44,13 +44,19 @@ public class SubscriptionService {
         subscription.setEndDate(calculateEndDate(planType));
         subscription.setPrice(getPlanPrice(planType));
         subscription.setActive(true);
-        
+        subscription.setAutoRenew(false); // Default to false
+
+        // Save subscription
         Subscription saved = subscriptionRepository.save(subscription);
         
+        // Flush to ensure immediate persistence
+        subscriptionRepository.flush();
+
         // Update user's subscription type
         user.setSubscriptionType(planType);
         userRepository.save(user);
-        
+        userRepository.flush();
+
         return saved;
     }
     
