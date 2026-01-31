@@ -2,6 +2,8 @@
 
 Spring Boot backend for a **Real Estate Property Listing Application** using **MySQL** with proper **Entity–Relationship (ER) mapping** and RESTful APIs.  
 This backend is designed to work seamlessly with a React.js frontend.
+For frontend 👇
+https://github.com/atharvjamkhindikar/REAL_ESTATE_PROPERTY_LISTING_PLATFORM_FRONTEND
 
 ---
 
