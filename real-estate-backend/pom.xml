@@ -102,6 +102,6 @@
                 </configuration>
             </plugin>
         </plugins>
-        <finalName>spinrg-boot-aws-exe</finalName>
+        <finalName>spring-boot-aws-exe</finalName>
     </build>
 </project>

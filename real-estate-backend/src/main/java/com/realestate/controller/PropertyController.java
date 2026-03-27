@@ -24,8 +24,8 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/properties")
-@CrossOrigin(origins = {"http://localhost:3000", "http://localhost:3001",
-                        "http://ec2-3-91-60-245.compute-1.amazonaws.com"})
+@CrossOrigin(origins = {"http://localhost:3000"})// "http://localhost:3001"})
+                        //"http://ec2-3-91-60-245.compute-1.amazonaws.com"})
 public class PropertyController {
     
     @Autowired

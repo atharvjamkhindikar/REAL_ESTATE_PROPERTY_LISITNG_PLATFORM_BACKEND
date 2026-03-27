@@ -18,7 +18,9 @@ public class WebConfig implements WebMvcConfigurer {
                 .allowedOrigins(
                     // EC2 production
 //                    "http://ec2-13-220-57-64.compute-1.amazonaws.com"
-                        "http://realestate-frontend.s3-website-us-east-1.amazonaws.com"
+                       // "http://realestate-frontend.s3-website-us-east-1.amazonaws.com"
+                    "http://localhost:3000",
+                        "http://192.168.1.5:3000"
                 )
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS")
                 .allowedHeaders("*")
